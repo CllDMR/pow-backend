@@ -11,9 +11,9 @@ datasource db {
 }
 
 model User {
-  id          Int          @id @default(autoincrement())
+  id          String       @id @default(cuid())
   createdAt   DateTime     @default(now())
-  updatedAt   DateTime
+  updatedAt   DateTime     @updatedAt
   chatGroups  ChatGroup[]
   chatSingles ChatSingle[]
   email       String       @unique
@@ -22,37 +22,37 @@ model User {
 }
 
 model ChatGroup {
-  id         Int            @id @default(autoincrement())
+  id         String         @id @default(cuid())
   createdAt  DateTime       @default(now())
-  updatedAt  DateTime
+  updatedAt  DateTime       @updatedAt
   adminUsers String
   users      User[]
   messages   MessageGroup[]
 }
 
 model ChatSingle {
-  id        Int             @id @default(autoincrement())
+  id        String          @id @default(cuid())
   createdAt DateTime        @default(now())
-  updatedAt DateTime
+  updatedAt DateTime        @updatedAt
   users     User[]
   messages  MessageSingle[]
 }
 
 model MessageGroup {
-  id          Int        @id @default(autoincrement())
+  id          String     @id @default(cuid())
   createdAt   DateTime   @default(now())
   ChatGroup   ChatGroup? @relation(fields: [chatGroupId], references: [id])
-  chatGroupId Int?
+  chatGroupId String?
   text        String
   seenBy      String
   sentTo      String
 }
 
 model MessageSingle {
-  id           Int         @id @default(autoincrement())
+  id           String      @id @default(cuid())
   createdAt    DateTime    @default(now())
   ChatSingle   ChatSingle? @relation(fields: [chatSingleId], references: [id])
-  chatSingleId Int?
+  chatSingleId String?
   text         String
   seen         Boolean
   sent         Boolean
