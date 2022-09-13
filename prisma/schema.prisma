@@ -11,15 +11,15 @@ datasource db {
 }
 
 model User {
-  id          String       @id @default(cuid())
-  createdAt   DateTime     @default(now())
-  updatedAt   DateTime     @updatedAt
-  chatGroups  ChatGroup[]
-  chatSingles ChatSingle[]
-  profile     Profile?
-  email       String       @unique
-  username    String
-  password    String
+  id            String         @id @default(cuid())
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  chatMultiples ChatMultiple[]
+  chatSingles   ChatSingle[]
+  profile       Profile?
+  email         String         @unique
+  username      String
+  password      String
 }
 
 model Profile {
@@ -34,13 +34,13 @@ model Profile {
   age       Int
 }
 
-model ChatGroup {
-  id         String         @id @default(cuid())
-  createdAt  DateTime       @default(now())
-  updatedAt  DateTime       @updatedAt
+model ChatMultiple {
+  id         String            @id @default(cuid())
+  createdAt  DateTime          @default(now())
+  updatedAt  DateTime          @updatedAt
   adminUsers String
   users      User[]
-  messages   MessageGroup[]
+  messages   MessageMultiple[]
   name       String
 }
 
@@ -52,14 +52,14 @@ model ChatSingle {
   messages  MessageSingle[]
 }
 
-model MessageGroup {
-  id          String     @id @default(cuid())
-  createdAt   DateTime   @default(now())
-  ChatGroup   ChatGroup? @relation(fields: [chatGroupId], references: [id])
-  chatGroupId String?
-  text        String
-  seenBy      String
-  sentTo      String
+model MessageMultiple {
+  id             String        @id @default(cuid())
+  createdAt      DateTime      @default(now())
+  ChatMultiple   ChatMultiple? @relation(fields: [chatMultipleId], references: [id])
+  chatMultipleId String?
+  text           String
+  seenBy         String
+  sentTo         String
 }
 
 model MessageSingle {
