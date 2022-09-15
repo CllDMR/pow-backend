@@ -25,6 +25,11 @@ export class MessageSingleController {
       ...createMessageSingleDto,
       seen: false,
       sent: false,
+      ChatSingle: {
+        connect: {
+          id: chatSingleId,
+        },
+      },
     });
   }
 
