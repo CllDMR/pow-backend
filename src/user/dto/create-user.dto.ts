@@ -1,4 +1,6 @@
+import { IntersectionType } from '@nestjs/mapped-types';
 import { IsEmail, IsString } from 'class-validator';
+import { CreateProfileDto } from '../profile/dto/create-profile.dto';
 
 export class CreateUserDto {
   @IsString()
@@ -11,3 +13,8 @@ export class CreateUserDto {
   @IsString()
   password: string;
 }
+
+export class CreateUserAndProfileDto extends IntersectionType(
+  CreateUserDto,
+  CreateProfileDto,
+) {}

@@ -7,9 +7,8 @@ import {
   Patch,
   Post,
 } from '@nestjs/common';
-import { CreateUserDto } from './dto/create-user.dto';
+import { CreateUserAndProfileDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { CreateProfileDto } from './profile/dto/create-profile.dto';
 import { UserService } from './user.service';
 
 @Controller('users')
@@ -17,7 +16,7 @@ export class UserController {
   constructor(private readonly userService: UserService) {}
 
   @Post()
-  create(@Body() createUserAndProfileDto: CreateUserDto & CreateProfileDto) {
+  create(@Body() createUserAndProfileDto: CreateUserAndProfileDto) {
     const { age, bio, email, firstname, lastname, password, username } =
       createUserAndProfileDto;
 
